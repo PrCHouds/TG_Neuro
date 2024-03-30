@@ -7,7 +7,7 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 # load image
 
-def li(p):
+def load_img(p):
     img = cv2.imread(p)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img = img.astype(np.float32)/127.5 -1
@@ -16,22 +16,17 @@ def li(p):
     return img
 
 # preprocess image
-def pi(img,td=224):
+def prep_image(img,td=224):
     shp = tf.cast(tf.shape(img)[1:-1], tf.float32)
-    sd  = min(shp)
-    scl = td/sd
-    nhp = tf.cast(shp*scl, tf.int32)
+    nhp = tf.cast(shp*td/min(shp), tf.int32)
     img = tf.image.resize(img,nhp)
     img = tf.image.resize_with_crop_or_pad(img, td,td)
     return img
 
 def cartoon(img_p):
-    # loading image
-    si = li(img_p)
-
-    psi = pi(si,td=512)
+    si = load_img(img_p)
+    psi = prep_image(si,td=512)
     psi.shape
-
     # model dataflow
     m = 'model/1.tflite'
     i = tf.lite.Interpreter(model_path=m)
@@ -49,10 +44,6 @@ def cartoon(img_p):
     cv2.imwrite("results/"+img_p,o)
 
 if __name__ == "__main__":
-    # checking the results
-    # bot.infinity_polling()
-
     imgs = ["content/"+name for name in os.listdir("content/")]
-
     for i in imgs:
         cartoon(i)
