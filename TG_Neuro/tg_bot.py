@@ -10,8 +10,8 @@ def get_photo(message):
     with open(src, 'wb') as new_file:
         new_file.write(downloaded_file)
     bot.reply_to(message, 'Фото загружено')
-
     img = PIL.Image.open(src)
     img.save('test.jpg')
-    bot.send_photo(message.chat.id, photo=open('test.jpg', 'rb'))
+    cartoon('test.jpg')
+    bot.send_photo(message.chat.id, photo=open('results/test.jpg', 'rb'))
 bot.polling()
