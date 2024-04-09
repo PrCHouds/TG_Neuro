@@ -1,4 +1,4 @@
-
+# libraries
 import keras
 from keras.datasets import cifar10
 import matplotlib.pyplot as plt

@@ -1,7 +1,7 @@
 import PIL.Image
 import telebot as tb
 from multi import *
-
+# new telebot
 bot = tb.TeleBot('6995134411:AAEGFcqbpeEAIp1XS4OljLCJYyIBh9jIFn4')
 s = 0
 @bot.message_handler(content_types=['text'])

@@ -1,5 +1,4 @@
-# import libraries
-
+# import librarie
 import os
 import cv2
 import numpy as np
